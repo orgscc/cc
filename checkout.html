@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إتمام الشراء</title>
+    <link rel="stylesheet" href="style.css"> <!-- تأكد من تضمين ملف CSS هنا -->
+    <link rel="stylesheet" href="cart.html">
+</head>
+<body>
+
+<!-- جزء من صفحة إتمام الشراء -->
+<div id="purchase-details">
+    <h2>إتمام الشراء</h2>
+    <p id="total-amount">المجموع: <span>0</span> ريال</p>
+
+    <button id="complete-purchase-btn">إتمام الشراء</button>
+
+    <!-- هذه الأزرار ستظهر بعد الضغط على "إتمام الشراء" -->
+    <div id="payment-options" style="display:none;">
+        <button id="stc-pay-btn">الدفع عبر استيسي باي</button>
+        <button id="discord-pay-btn">الدفع عبر ديسكورد</button>
+    </div>
+</div>
+
+<script>
+    // هنا يمكنك تحديد المجموع بناءً على سلة المشتريات
+    let totalAmount = 100;  // المجموع (ضع المجموع الفعلي هنا)
+    document.getElementById('total-amount').getElementsByTagName('span')[0].innerText = totalAmount;
+
+    // عندما يضغط المستخدم على زر "إتمام الشراء"
+    document.getElementById('complete-purchase-btn').addEventListener('click', function() {
+        document.getElementById('payment-options').style.display = 'block';  // عرض خيارات الدفع
+    });
+
+    // روابط الدفع
+    document.getElementById('stc-pay-btn').addEventListener('click', function() {
+        window.location.href = 'https://example.com/stc-pay';  // ضع رابط الدفع عبر استيسي باي هنا
+    });
+
+    document.getElementById('discord-pay-btn').addEventListener('click', function() {
+        window.location.href = 'https://example.com/discord-pay';  // ضع رابط الدفع عبر ديسكورد هنا
+    });
+</script>
+
+</body>
+</html>

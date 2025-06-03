@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل المنتج</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="product-details">
+        <h1 id="product-name"></h1>
+        <img id="product-image" src="" alt="صورة المنتج">
+        <p id="product-description">وصف المنتج</p>
+        <p id="product-price-sar">السعر بالريال: <span></span></p>
+        <p id="product-price-credit">السعر بالكريدت: <span></span></p>
+        <button onclick="addToCartFromDetails()">أضف إلى السلة</button>
+        <button onclick="goBack()">رجوع</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // دالة لاسترجاع معلمات الرابط
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // تحميل بيانات المنتج من الرابط
+        document.addEventListener("DOMContentLoaded", () => {
+            const productName = getQueryParam('name');
+            
+            // جلب المنتج من ملف script.js
+            const product = products.find(p => p.name === productName);
+
+            if (product) {
+                document.getElementById("product-name").textContent = product.name;
+                document.getElementById("product-image").src = product.image;
+                document.getElementById("product-price-sar").querySelector('span').textContent = product.priceSAR + " ريال";
+                document.getElementById("product-price-credit").querySelector('span').textContent = product.priceCredit;
+            } else {
+                document.getElementById("product-name").textContent = "المنتج غير موجود";
+            }
+        });
+
+        // إضافة المنتج إلى السلة
+        function addToCartFromDetails() {
+            const productName = getQueryParam('name');
+            const product = products.find(p => p.name === productName);
+            
+            if (product) {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const formattedPrice = `${product.priceSAR} ريال`;
+
+                // إضافة المنتج إلى السلة
+                const existingProductIndex = cart.findIndex(item => item.name === product.name);
+                if (existingProductIndex !== -1) {
+                    cart[existingProductIndex].quantity += 1;
+                } else {
+                    cart.push({ name: product.name, price: product.priceSAR, quantity: 1 });
+                }
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert('تم إضافة المنتج إلى السلة');
+            }
+        }
+
+        // العودة إلى الصفحة السابقة
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

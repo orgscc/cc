@@ -1,0 +1,688 @@
+/* استيراد الخطوط */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap");
+
+:root {
+    --IBM-font: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+body {
+    font-family: var(--IBM-font);
+    background: #ffffff;
+    color: #111;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* رأس الصفحة */
+header {
+    background: #ffffff;
+    padding: 15px;
+    display: flex;
+    justify-content: justify-content: flex-end;
+    align-items: center;
+    color: #000;
+}
+
+/* رأس الصفحة - أيقونة السلة */
+.cart-icon {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+/* تأثيرات التمرير */
+.product, button, .details-btn {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product:hover,
+button:hover,
+.details-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 15px rgba(226, 226, 226, 0.2);
+}
+
+/* خلفية محتوى الصفحة */
+main {
+    text-align: center;
+    padding: 20px;
+}
+
+/* حاوية المنتجات */
+#products-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 20px;
+}
+
+/* تصميم المنتج */
+.product {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    box-sizing: border-box;
+}
+
+.product img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+/* تنسيق السعر مع الأيقونات */
+.price-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.price-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+/* أزرار السلة */
+#cart-actions {
+    margin-top: 20px;
+}
+
+#checkout-container,
+#clear-cart-container {
+    margin-top: 15px;
+}
+
+button, .details-btn, #add-to-cart-btn {
+    background: #c2c2c2;
+    color: black;
+    padding: 12px 20px;
+    margin: 10px;
+    border: none;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    font-family: var(--IBM-font);
+}
+
+button:hover,
+.details-btn:hover,
+#add-to-cart-btn:hover {
+    background: #d3d3d3;
+    color: black;
+}
+
+/* صفحة تفاصيل المنتج */
+#product-details {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+}
+
+#product-details img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* صفحة الدفع */
+#purchase-details {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+}
+
+#purchase-details button {
+    width: 80%;
+    padding: 15px;
+    font-size: 1.2em;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+#stc-pay {
+    background: #009688;
+    color: white;
+}
+
+#stc-pay:hover {
+    background: #008577;
+}
+
+#discord-pay {
+    background: #7289DA;
+    color: white;
+}
+
+#discord-pay:hover {
+    background: #5A6FCD;
+}
+
+#cart-actions button {
+    width: 200px;
+    margin: 10px;
+}
+
+#cart-actions button:hover {
+    background: #ffcc00;
+    color: black;
+}
+
+#complete-purchase-btn {
+    background: #ff5722;
+    width: 80%;
+    font-size: 1.2em;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+#complete-purchase-btn:hover {
+    background: #e64a19;
+}
+
+#payment-options {
+    display: none;
+    margin-top: 20px;
+}
+
+#payment-options button {
+    width: 80%;
+    padding: 15px;
+    font-size: 1.2em;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#stc-pay-btn {
+    background: #009688;
+    color: white;
+}
+
+#stc-pay-btn:hover {
+    background: #008577;
+}
+
+#discord-pay-btn {
+    background: #7289DA;
+    color: white;
+}
+
+#discord-pay-btn:hover {
+    background: #5A6FCD;
+}
+
+/* تنسيق السلة */
+#cart-container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    margin: auto;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.cart-prices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.price-box {
+    display: flex;
+    align-items: center;
+    background: #444;
+    padding: 5px;
+    border-radius: 4px;
+    width: 100px;
+    justify-content: center;
+    margin-bottom: 3px;
+    color: #f1c203;
+}
+
+.price-box img {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+}
+
+/* تنسيق المجموع */
+#cart-total-container {
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 6px;
+    width: 50%;
+    margin: auto;
+    margin-top: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.total-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.total-box img {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+}
+
+#clear-cart-btn {
+    background: red;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    font-size: 1em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#checkout-btn {
+    background: green;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    font-size: 1em;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* تصميم صفحة تفاصيل المنتج */
+.product-details {
+    background-color: #d4d4d4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+.product-details img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-details h1 {
+    color: #000;
+    margin-top: 20px;
+}
+
+.product-details p {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.product-details .currency {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.product-details button {
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.product-details button:hover {
+    background-color: #f0f0f0;
+}
+
+.product-details .back-btn {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.product-details .back-btn:hover {
+    background-color: #0056b3;
+}
+
+/* شاشة الترحيب */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+#splash-logo {
+    width: 950px;
+    height: auto;
+    margin-bottom: 175px;
+}
+
+.loader {
+    width: 40%;
+    height: 4px;
+    background-color: #faf7f7;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.loader .bar {
+    width: 0%;
+    height: 100%;
+    background-color: #000000;
+    animation: loadingBar 3s linear forwards;
+}
+
+@keyframes loadingBar {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+#remove-yellow-btn {
+    display: none !important;
+}
+
+/* الفوتر */
+.footer {
+    background-color: #fafafa;
+    color: #000000;
+    font-family: var(--IBM-font);
+    text-align: center;
+    padding: 30px 15px 20px;
+    margin-top: 50px;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    max-width: 100px;
+    margin-bottom: 20px;
+}
+
+.footer-buttons {
+    margin-bottom: 15px;
+}
+
+.footer-btn {
+    display: inline-block;
+    margin: 5px 10px;
+    padding: 8px 18px;
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(168, 168, 168);
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: var(--IBM-font);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.footer-btn:hover {
+    background-color: white;
+    color: black;
+}
+
+.footer-text {
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+/* حماية الصور */
+.protected-image {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    width: 500px;
+    height: auto;
+}
+img {
+  width: 90vw;        /* العرض الافتراضي: 90% من عرض الشاشة */
+  height: auto;
+  border-radius: 0;
+}
+
+/* لأجهزة الكمبيوتر (شاشات أكبر من 768px) */
+@media (min-width: 768px) {
+  img {
+    width: 600px;      /* تثبيت العرض على 600px */
+  }
+}
+.link-text {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+.link-text:hover {
+  color: #007bff;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+/* تصفير كل شيء */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+/* الشريط العلوي */
+.header-titles {
+  background-color: white;
+  padding: 250px 500px; /* زيادة البادينغ ليوسع المستطيل */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; /* لأن الاتجاه RTL، هذا يخليهم يمين */
+  align-items: center;
+  width: 100vw; /* تأكد من أن العرض يمتد لعرض الشاشة بالكامل */
+  height: 120px; /* زيادة الارتفاع */
+  direction: rtl; /* مهم عشان الكلمات تبدأ من اليمين */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+
+/* الصفحة الرئيسية */
+.main-title {
+  font-size:15px; /* أكبر */
+  font-weight: bold;
+  margin-left: 15px; /* مسافة بين الكلمتين */
+  color: black;
+  border: none;
+  padding: 0;
+}
+
+/* المتجر */
+.sub-title {
+  font-size: 13px;
+  font-weight: normal;
+  color: black;
+  border: none;
+  padding: 0;
+  text-decoration: none; /* عشان ما يطلع تحته خط */
+  cursor: pointer; /* يعطي شكل اليد */
+}
+/* إعدادات عامة */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff; /* خلفية بيضاء */
+  color: #000000;             /* خط أسود */
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  direction: rtl;
+}
+
+/* الحاوية العامة */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* الشريط العلوي */
+.header-titles {
+  background-color: #ffffff;
+  padding: 25px 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  direction: rtl;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  border-bottom: 1px solid #ddd;
+}
+
+/* العنوان الرئيسي */
+.main-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 15px;
+  color: #000000;
+  background-color: transparent;
+}
+
+/* الرابط الفرعي (المتجر) */
+.sub-title {
+  font-size: 17px;
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+/* صورة ترحيبية */
+.responsive-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 150px auto 30px auto; /* عشان ما تتغطى من الهيدر */
+  pointer-events: none;
+  user-select: none;
+}
+
+/* تنسيق نصوص وروابط */
+a {
+  color: #000000;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #333333;
+}
+body {
+  background-color: white;
+  color: black;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+  line-height: 2;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+body.noscroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* شاشة الترحيب تغطي كامل الصفحة */
+#splash-screen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body.noscroll {
+  overflow: hidden;
+  height: 100vh;
+}

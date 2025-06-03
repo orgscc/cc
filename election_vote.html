@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>التصويت للرئاسة</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'IBM Plex Sans Arabic', sans-serif;
+      background: white;
+      color: black;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    .vote-box {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+    }
+    img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    .checkbox {
+      margin: 20px 0;
+    }
+    .vote-btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 30px;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .success {
+      background: #d4edda;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .results {
+      margin-top: 30px;
+      text-align: right;
+    }
+    .result-bar {
+      background: #eee;
+      border-radius: 10px;
+      height: 20px;
+      margin: 5px 0 20px;
+      overflow: hidden;
+    }
+    .result-bar-fill {
+      background: #007bff;
+      height: 100%;
+      color: white;
+      text-align: right;
+      padding-right: 5px;
+      line-height: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="vote-box" id="voteBox">
+    <img id="candidateImage" src="" alt="">
+    <h2 id="candidateName"></h2>
+    <p id="candidateDate"></p>
+
+    <div class="checkbox">
+      <input type="checkbox" id="captcha"> <label for="captcha">أنا لست روبوت</label>
+    </div>
+
+    <button class="vote-btn" onclick="submitVote()">تصويت</button>
+  </div>
+
+  <div class="success" id="successBox" style="display:none;">
+    ✅ تم التصويت بنجاح
+    <br><br>
+    <button class="vote-btn" onclick="showResults()">عرض الأصوات</button>
+  </div>
+
+  <div class="results" id="resultsBox" style="display:none;"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+
+  <script>
+    // تكوين Firebase
+    const firebaseConfig = {
+      apiKey: "API_KEY", // استبدلها بمفتاح API الخاص بمشروعك
+      authDomain: "PROJECT_ID.firebaseapp.com",
+      databaseURL: "https://PROJECT_ID.firebaseio.com", // الرابط الخاص بقاعدة البيانات
+      projectId: "PROJECT_ID",
+      storageBucket: "PROJECT_ID.appspot.com",
+      messagingSenderId: "SENDER_ID",
+      appId: "APP_ID"
+    };
+    
+    // تهيئة Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.database(app);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get("id");
+    const name = decodeURIComponent(urlParams.get("name"));
+    const date = decodeURIComponent(urlParams.get("date"));
+    const img = decodeURIComponent(urlParams.get("img"));
+
+    document.getElementById("candidateName").textContent = name;
+    document.getElementById("candidateDate").textContent = date;
+    document.getElementById("candidateImage").src = img;
+
+    // الوظيفة لإرسال التصويت
+    function submitVote() {
+      if (!document.getElementById("captcha").checked) {
+        alert("يرجى التحقق أولاً");
+        return;
+      }
+
+      const voteRef = db.ref('votes/' + id);
+
+      voteRef.transaction(function(currentVotes) {
+        return (currentVotes || 0) + 1;
+      });
+
+      // إخفاء منطقة التصويت وإظهار رسالة النجاح
+      document.getElementById("voteBox").style.display = "none";
+      document.getElementById("successBox").style.display = "block";
+    }
+
+    // عرض نتائج التصويت
+    function showResults() {
+      const votesRef = db.ref('votes');
+      votesRef.once('value', function(snapshot) {
+        const votes = snapshot.val() || {};
+        const candidates = [
+          { id: 1, name: "فهد بن محمد الغامدي" },
+          { id: 2, name: "محمد بن سبيل الهذلي" },
+          { id: 3, name: "سعود بن عبدالله العنزي" },
+          { id: 4, name: "فيصل بن عبدالإله الشريف" },
+          { id: 5, name: "نايف بن سعود المالكي" },
+          { id: 6, name: "نايف بن محمد الشريف" },
+          { id: 7, name: "محمد بن طارق" },
+          { id: 8, name: "مشاري بن عبدالحميد المظيبري" },
+          { id: 9, name: "ياسر بن فهد الزهراني" },
+          { id: 10, name: "أحمد بن راكان الشريف" }
+        ];
+
+        const resultArray = candidates.map(c => ({
+          ...c,
+          vote: votes[c.id] || 0
+        })).sort((a, b) => b.vote - a.vote);
+
+        const total = resultArray.reduce((sum, c) => sum + c.vote, 0) || 1;
+
+        let html = "<h3>نتائج التصويت</h3>";
+        resultArray.forEach(c => {
+          const percent = ((c.vote / total) * 100).toFixed(1);
+          html += `
+            <div><strong>${c.name}</strong> - ${percent}% (${c.vote} صوت)</div>
+            <div class="result-bar">
+              <div class="result-bar-fill" style="width:${percent}%;">${percent}%</div>
+            </div>
+          `;
+        });
+
+        document.getElementById("successBox").style.display = "none";
+        document.getElementById("resultsBox").innerHTML = html;
+        document.getElementById("resultsBox").style.display = "block";
+      });
+    }
+  </script>
+</body>
+</html>

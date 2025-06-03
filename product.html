@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل المنتج - OPEC - أوبك</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>تفاصيل المنتج</h1>
+        <!-- زر الرجوع إلى الصفحة الرئيسية -->
+        <button onclick="goBack()">رجوع</button>
+    </header>
+
+    <div id="product-detail" class="product-detail">
+        <img id="product-image" src="" alt="صورة المنتج">
+        <h2 id="product-name"></h2>
+        <p id="product-description">وصف المنتج هنا...</p>
+        <p>
+            <img src="https://cdn.discordapp.com/attachments/1186721878363091031/1348944475631652914/130_20250311120308.png?ex=67d14df1&is=67cffc71&hm=4a19f495ffe0938b3c52c91a6adaf8489ef8133a0c6612b8bff1869e8472666e&" 
+            alt="ريال" class="currency-icon" style="width: 20px; vertical-align: middle;"> 
+            <span id="product-price" style="font-weight: bold; font-size: 1.2em;"></span>
+        </p>
+        <button onclick="addToCartFromDetail()">أضف للسلة +</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

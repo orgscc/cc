@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم مجلس التنسيق الأعلى</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>لوحة تحكم مجلس التنسيق الأعلى</h1>
+        <button id="logout-btn">تسجيل خروج</button>
+
+        <section id="products-section">
+            <h2>إدارة المنتجات</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>اسم المنتج</th>
+                        <th>السعر (ريال)</th>
+                        <th>السعر (كريدت)</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="products-list">
+                    <!-- سيتم تعبئة المنتجات هنا -->
+                </tbody>
+            </table>
+            <button id="add-product-btn">إضافة منتج جديد</button>
+        </section>
+
+        <section id="users-section">
+            <h2>إدارة المستخدمين</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>اسم المستخدم</th>
+                        <th>الدور</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="users-list">
+                    <!-- سيتم تعبئة المستخدمين هنا -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

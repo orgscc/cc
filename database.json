@@ -1,0 +1,9 @@
+{
+    "users": [
+        { "username": "admin", "password": "1234", "role": "admin" },
+        { "username": "user1", "password": "pass1", "role": "user" }
+    ],
+    "products": [
+        { "name": "بوت سيستم", "priceSAR": "5.75", "priceCredit": "20m" }
+    ]
+}

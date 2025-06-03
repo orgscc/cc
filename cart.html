@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سلة المشتريات</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>سلة المشتريات</h1>
+    </header>
+
+    <main>
+        <!-- المنتجات التي تمت إضافتها للسلة -->
+        <div id="cart-container"></div>
+
+        <!-- المجموع -->
+        <div id="cart-total-container">
+            <div class="total-box">
+                <img src="https://cdn.discordapp.com/attachments/1186721878363091031/1348944475631652914/130_20250311120308.png?ex=67d34831&is=67d1f6b1&hm=9a55d86eb770adfe55a40ecc9a3ad198391e0ee829b9f719ec9eee5083f24ff9&" alt="ريال">
+                <span id="cart-total-sar">0/span>
+            </div>
+            <div class="total-box">
+                <img src="https://cdn.discordapp.com/attachments/1186721878363091031/1349645031077580900/131_20250313102712.png?ex=67d3da62&is=67d288e2&hm=57b9e15ae7dd7cfc559bf2415f00c132b0b1ba55d013e73332de221708f774b1&" alt="كريدت">
+                <span id="cart-total-cr"> 0 </span>
+            </div>
+        </div>
+
+        <!-- أزرار السلة -->
+        <div id="cart-actions">
+            <button id="clear-cart-btn">🗑️ إفراغ السلة</button>
+            <button id="checkout-btn">✅ إتمام الشراء</button>
+            <div class="cart-icon" onclick="window.location.href='checkout.html'">
+        </div>
+    </main>
+
+    <script src="cart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const cartContainer = document.getElementById("cart-container");
+            const cartTotalSar = document.getElementById("cart-total-sar");
+            const cartTotalCr = document.getElementById("cart-total-cr");
+            const clearCartBtn = document.getElementById("clear-cart-btn");
+
+            function loadCart() {
+                const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                cartContainer.innerHTML = "";
+                let totalSar = 0;
+                let totalCr = 0;
+
+                cart.forEach((item, index) => {
+                    totalSar += item.price * item.quantity;
+                    totalCr += item.credit * item.quantity;
+
+                    const productDiv = document.createElement("div");
+                    productDiv.classList.add("cart-item");
+                    productDiv.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <h3>${item.name}</h3>
+                            <p>السعر: ${item.price} </p>
+                            <p>كريدت: ${item.credit}</p>
+                            <p>الكمية: ${item.quantity}</p>
+                            <button class="remove-item" data-index="${index}">❌ إزالة</button>
+                        </div>
+                    `;
+                    cartContainer.appendChild(productDiv);
+                });
+
+                cartTotalSar.textContent = totalSar.toFixed(2);
+                cartTotalCr.textContent = totalCr;
+            }
+
+            cartContainer.addEventListener("click", function(e) {
+                if (e.target.classList.contains("remove-item")) {
+                    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    const index = e.target.getAttribute("data-index");
+                    cart.splice(index, 1);
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    loadCart();
+                }
+            });
+
+            clearCartBtn.addEventListener("click", function() {
+                localStorage.removeItem("cart");
+                loadCart();
+            });
+
+            loadCart();
+        });
+    </script>
+</body>
+</html>

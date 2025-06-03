@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المتجر - مجلس التنسيق الأعلى</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/nrbSzBKP/image.png8347ecffae1ea03b4fb5cb0b3b38cd48c&">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            font-weight: bold;
+            background-color: #d3d3d3;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+        }
+        body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+        .responsive-img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+    }
+         img {
+      max-width: 100%;
+      width: 90vw;
+      max-height: 100vh;
+      height: auto;
+      pointer-events: none;
+      user-select: none;
+    }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .add-to-cart-btn {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #00aaff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #008ecc;
+        }
+        .footer-btn {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 5px;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.footer-btn:hover {
+    background-color: black;
+    color: white;
+}
+
+    </style>    
+</head>
+    <div class="maintenance-overlay">
+  <div class="maintenance-box">
+    <div class="maintenance-text">
+      <div class="maintenance-title">عذراً ! </div>
+      <div class="maintenance-description">
+       تم حظر الصفحة من قبل مجلس التنسيق الأعلى حتى إشعار آخر
+      </div>
+    </div>
+    <div class="maintenance-image">
+      <img src="https://i.postimg.cc/fLxzPSPz/image.png" alt="صورة الصيانة">
+    </div>
+  </div>
+</div>
+
+<style>
+  .maintenance-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #d3d3d3;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    padding: 2rem;
+  }
+
+  .maintenance-box {
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+
+  .maintenance-text {
+    flex: 1;
+    padding-right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .maintenance-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  .maintenance-description {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #000;
+  }
+
+  .maintenance-image {
+    flex: 0 0 200px;
+    max-width: 200px;
+    height: auto;
+  }
+
+  .maintenance-image img {
+    width: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 600px) {
+    .maintenance-box {
+      flex-direction: column-reverse;
+      align-items: center;
+      text-align: center;
+    }
+    .maintenance-text {
+      padding: 0;
+      margin-top: 1.5rem;
+    }
+  }
+</style>
+<body>
+
+  <!-- المحتوى الأساسي -->
+  <div id="main-content">
+    <header>
+        <h1>المتجر</h1>
+
+        <div class="cart-icon" onclick="window.location.href='cart.html'">
+            <img id="cart-icon" src="https://i.postimg.cc/nrbSzBKP/image.png" alt="السلة" style="width: 30px;">
+            <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <main id="products-container" class="products-grid">
+        <!-- المنتجات ستظهر هنا -->
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+
+ <footer class="footer">
+        <div class="footer-content">
+            <img src="https://i.postimg.cc/fLxzPSPz/image.png" alt="شعار الموقع" class="protected-image">
+    
+           <div class="footer-buttons">
+                <a href="privacy.html" class="footer-btn">سياسة الخصوصية</a>
+                <a href="rules.html" class="footer-btn">الشروط والأحكام</a>
+            </div>
+    
+            <p class="footer-text">
+                &copy; <span id="year"></span> جميع الحقوق محفوظة | 2025
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة الدفع</title>
+</head>
+<body>
+    <div id="purchase-details">
+        <h2>شراء المنتج</h2>
+        <p>المنتج: <span id="purchase-product-name"></span></p>
+        <p>السعر: <span id="purchase-price"></span></p>
+
+        <button id="stc-pay">الدفع عبر STC PAY</button>
+        <button id="discord-pay">الدفع عبر DISCORD</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const purchaseDetails = JSON.parse(localStorage.getItem("purchaseDetails"));
+            document.getElementById("purchase-product-name").innerText = purchaseDetails.name;
+            document.getElementById("purchase-price").innerText = purchaseDetails.currency === "SAR"
+                ? `${purchaseDetails.priceSAR.toFixed(2)} ريال`
+                : `${purchaseDetails.priceCredit} كريدت`;
+
+            document.getElementById("stc-pay").addEventListener("click", () => {
+                alert("تم اختيار الدفع عبر STC PAY");
+                // أضف هنا الكود المتعلق بمعالجة الدفع عبر STC PAY
+            });
+
+            document.getElementById("discord-pay").addEventListener("click", () => {
+                alert("تم اختيار الدفع عبر DISCORD");
+                // أضف هنا الكود المتعلق بمعالجة الدفع عبر DISCORD
+            });
+        });
+    </script>
+</body>
+</html>
