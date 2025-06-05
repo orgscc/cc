@@ -286,30 +286,30 @@
     <h1 class="page-title">بوابة الدخول الموحد</h1>
 
     <div class="login-container">
-        <div class="image-section">
-            <div class="image-placeholder">
-                رابط الصورة
-            </div>
-        </div>
 
         <div class="form-section">
             <h2 class="form-title">تسجيل الدخول</h2>
-
             <div id="errorMessage" class="error-message"></div>
             <div id="successMessage" class="success-message"></div>
 
             <div class="form-group">
-                <label class="form-label">الهوية أو البريد الإلكتروني</label>
+                <label class="form-label">الهوية التنسيقية العليا / اسم المستخدم / البريد الإلكتروني</label>
                 <div class="input-wrapper">
                     <input type="text" id="txtUsername" class="form-input" placeholder="أدخل اسم المستخدم أو البريد الإلكتروني" />
-                    <span class="user-icon">👤</span>
+                    <span class="user-icon">
+  <img src="https://postimg.cc/xqMf7pWR" alt="User Icon" style="width: 20px; height: 20px;">
+</span>
                 </div>
             </div>
 
             <div class="form-group">
+                <label class="form-label">كلمة المرور / الرقم السري للهوية</label>
                 <div class="input-wrapper">
                     <input type="password" id="txtPassword" class="form-input" placeholder="أدخل كلمة المرور" />
-                    <span class="lock-icon">🔒</span>
+                    <span class="lock-icon">
+                        <img src="https://postimg.cc/WhVNP6VP" alt= "lock icon" style="width: 20px; height: 20px;">
+
+                    </span>
                 </div>
             </div>
 
@@ -322,7 +322,7 @@
                 جاري تسجيل الدخول...
             </div>
 
-            <div class="divider">أو</div>
+            <div class="divider"> - - - - - أو - - - - - </div>
 
             <div class="create-account">
                 <a href="#" class="create-account-btn" onclick="createAccount()">إنشاء حساب</a>
@@ -332,8 +332,8 @@
 
     <script>
         const defaultUsers = [
-            { username: "admin", email: "admin@example.com", password: "123456", fullName: "أدمن", role: "مدير" },
-            { username: "user", email: "user@example.com", password: "abcdef", fullName: "مستخدم عادي", role: "مستخدم" }
+            { username: "admin", email: "mo2010mmhe@gmail.com", password: "13111993Mmsd", fullName: "محمد بن طارق", role: "الرئيس" },
+            { username: "user", email: "user@example.com", password: "abcdef", fullName: "فهد من محمد الغامدي", role: "عضو" }
         ];
 
         function validateForm() {
@@ -366,7 +366,7 @@
                 sessionStorage.setItem('role', user.role);
                 sessionStorage.setItem('loginTime', new Date().toISOString());
 
-                showSuccess('تم تسجيل الدخول بنجاح! مرحباً ' + user.fullName);
+                showSuccess('أهلاً ' + user.fullName);
                 setTimeout(() => {
                     window.location.href = 'index.html';
                 }, 2000);
@@ -415,7 +415,7 @@
 
         function createAccount() {
             alert('سيتم توجيهك لصفحة إنشاء حساب جديد');
-            // window.location.href = 'register.html';
+            window.location.href = 'register.html';
         }
 
         document.addEventListener('DOMContentLoaded', function () {
