@@ -1,453 +1,486 @@
-<!DOCTYPE html>  
-<html lang="ar" dir="rtl">  
-<head>  
-    <meta charset="utf-8" />  
-    <title>تسجيل الدخول - بوابة الدخول الموحد</title>  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <title>تسجيل الدخول - بوابة الدخول الموحد</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- استيراد كامل خط IBM Plex Sans Arabic -->    
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">    
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- استيراد كامل خط IBM Plex Sans Arabic -->
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+        body {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            direction: rtl;
+            text-align: right;
+        }
 
-    <style>  
-        * {  
-            margin: 0;  
-            padding: 0;  
-            box-sizing: border-box;  
-        }  
-  
-        body {  
-            font-family: 'IBM Plex Sans Arabic', sans-serif;  
-            background: #ffffff;  
-            min-height: 100vh;  
-            direction: rtl;  
-            text-align: right;  
-        }  
-  
-        .header {  
-            background: white;  
-            padding: 15px 0;  
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);  
-        }  
-  
-        .header-container {  
-            max-width: 1200px;  
-            margin: 0 auto;  
-            padding: 0 20px;  
-            display: flex;  
-            justify-content: flex-end;  
-            align-items: center;  
-            gap: 30px;  
-        }  
-  
-        .home-link {  
-            color: #666;  
-            text-decoration: none;  
-            font-size: 16px;  
-            cursor: pointer;  
-            transition: color 0.3s;  
-        }  
-  
-        .home-link:hover {  
-            color: #333;  
-        }  
-  
-        .main-title {  
-            color: #333;  
-            font-size: 24px;  
-            font-weight: bold;  
-        }  
-  
-        .page-title {  
-            text-align: center;  
-            color: #333;  
-            font-size: 28px;  
-            font-weight: bold;  
-            margin: 40px 0;  
-        }  
-  
-        .login-container {  
-            max-width: 800px;  
-            margin: 0 auto;  
-            padding: 0 20px;  
-            display: flex;  
-            gap: 40px;  
-            align-items: flex-start;  
-        }  
-  
-        .image-section {  
-            flex: 1;  
-            text-align: center;  
-        }  
-  
-        .image-placeholder {  
-            width: 300px;  
-            height: 200px;  
-            background: #000;  
-            color: white;  
-            display: flex;  
-            align-items: center;  
-            justify-content: center;  
-            font-size: 24px;  
-            font-weight: bold;  
-            border-radius: 8px;  
-            margin: 0 auto;  
-        }  
-  
-        .form-section {  
-            flex: 1;  
-            background: white;  
-            padding: 40px;  
-            border-radius: 12px;  
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);  
-        }  
-  
-        .form-title {  
-            color: #333;  
-            font-size: 22px;  
-            font-weight: bold;  
-            margin-bottom: 30px;  
-            text-align: center;  
-        }  
-  
-        .form-group {  
-            margin-bottom: 20px;  
-        }  
-  
-        .form-label {  
-            display: block;  
-            color: #666;  
-            font-size: 14px;  
-            margin-bottom: 8px;  
-        }  
-  
-        /* قصّرنا طول الحقول صارت محددة 300 بيكسل فقط */  
-        .form-input {  
-            width: 300px;  
-            padding: 12px 45px 12px 15px;  
-            border: 2px solid #e1e1e1;  
-            border-radius: 6px;  
-            font-size: 14px;  
-            direction: rtl;  
-            text-align: right;  
-            transition: border-color 0.3s;  
-        }  
-  
-        .form-input:focus {  
-            outline: none;  
-            border-color: #4CAF50;  
-        }  
-  
-        .input-wrapper {  
-            position: relative;  
-            display: inline-block; /* صار العنصر محصور بحجم الحقل */  
-        }  
-  
-        /* أيقونة المستخدم والقفل بقيت 20×20 بيكسل عشان ما تطلع ممدودة */  
-        .user-icon img,  
-        .lock-icon img {  
-            position: absolute;  
-            left: 15px;  
-            top: 50%;  
-            transform: translateY(-50%);  
-            width: 20px;  
-            height: 20px;  
-            object-fit: contain;  
-        }  
-  
-        .forgot-password {  
-            color: #666;  
-            text-decoration: none;  
-            font-size: 12px;  
-            display: block;  
-            text-align: center;  
-            margin: 15px 0;  
-            transition: color 0.3s;  
-        }  
-  
-        .forgot-password:hover {  
-            color: #333;  
-        }  
-  
-        .login-btn {  
-            width: 100%;  
-            background: #000;  
-            color: white;  
-            padding: 15px;  
-            border: none;  
-            border-radius: 6px;  
-            font-size: 16px;  
-            font-weight: bold;  
-            cursor: pointer;  
-            margin-top: 10px;  
-            transition: background-color 0.3s;  
-        }  
-  
-        .login-btn:hover {  
-            background: #333;  
-        }  
-  
-        .login-btn:disabled {  
-            background: #ccc;  
-            cursor: not-allowed;  
-        }  
-  
-        .create-account {  
-            text-align: center;  
-            margin-top: 20px;  
-        }  
-  
-        .create-account-btn {  
-            background: #000;  
-            color: white;  
-            padding: 12px 30px;  
-            border: none;  
-            border-radius: 6px;  
-            font-size: 14px;  
-            cursor: pointer;  
-            text-decoration: none;  
-            display: inline-block;  
-            transition: background-color 0.3s;  
-        }  
-  
-        .create-account-btn:hover {  
-            background: #333;  
-        }  
-  
-        .divider {  
-            text-align: center;  
-            margin: 20px 0;  
-            color: #999;  
-            font-size: 14px;  
-        }  
-  
-        .error-message {  
-            background: #ffebee;  
-            color: #c62828;  
-            padding: 12px;  
-            border-radius: 6px;  
-            margin-bottom: 20px;  
-            text-align: center;  
-            font-size: 14px;  
-            display: none;  
-        }  
-  
-        .success-message {  
-            background: #e8f5e8;  
-            color: #2e7d32;  
-            padding: 12px;  
-            border-radius: 6px;  
-            margin-bottom: 20px;  
-            text-align: center;  
-            font-size: 14px;  
-            display: none;  
-        }  
-  
-        .loading {  
-            display: none;  
-            text-align: center;  
-            color: #666;  
-            font-size: 14px;  
-            margin-top: 10px;  
-        }  
-  
-        .spinner {  
-            display: inline-block;  
-            width: 20px;  
-            height: 20px;  
-            border: 3px solid #f3f3f3;  
-            border-top: 3px solid #333;  
-            border-radius: 50%;  
-            animation: spin 2s linear infinite;  
-            margin-left: 10px;  
-        }  
-  
-        @keyframes spin {  
-            0% { transform: rotate(0deg); }  
-            100% { transform: rotate(360deg); }  
-        }  
-  
-        @media (max-width: 768px) {  
-            .login-container {  
-                flex-direction: column;  
-                gap: 20px;  
-            }  
-              
-            .image-placeholder {  
-                width: 100%;  
-                max-width: 300px;  
-            }  
-              
-            .form-section {  
-                padding: 30px 20px;  
-            }  
-            /* نفس القياس حق الحقول ع الموبايل */  
-            .form-input {  
-                width: 100%;  
-                max-width: 300px;  
-            }  
-        }  
-    </style>  
-</head>  
-<body>  
-  
-    <div class="header">  
-        <div class="header-container">  
-            <a href="index.html" class="home-link" onclick="goToHome()">الصفحة الرئيسية</a>  
-            <div class="main-title">تسجيل الدخول</div>  
-        </div>  
-    </div>  
-  
-    <h1 class="page-title">بوابة الدخول الموحد</h1>  
-  
-    <div class="login-container">  
-  
-        <div class="form-section">  
-            <h2 class="form-title">تسجيل الدخول</h2>  
-            <div id="errorMessage" class="error-message"></div>  
-            <div id="successMessage" class="success-message"></div>  
-  
-            <div class="form-group">  
-                <label class="form-label">الهوية التنسيقية العليا / اسم المستخدم / البريد الإلكتروني</label>  
-                <div class="input-wrapper">  
-                    <input type="text" id="txtUsername" class="form-input" placeholder="أدخل اسم المستخدم أو البريد الإلكتروني" />  
-                    <span class="user-icon">  
-                        <img src="https://i.postimg.cc/wxb11S2S/image.png" alt="User Icon">  
-                    </span>  
-                </div>  
-            </div>  
-  
-            <div class="form-group">  
-                <label class="form-label">كلمة المرور / الرقم السري للهوية</label>  
-                <div class="input-wrapper">  
-                    <input type="password" id="txtPassword" class="form-input" placeholder="أدخل كلمة المرور" />  
-                    <span class="lock-icon">  
-                        <img src="https://i.postimg.cc/6qZW85Bc/image.png" alt="Lock Icon">  
-                    </span>  
-                </div>  
-            </div>  
-  
-            <a href="#" class="forgot-password" onclick="forgotPassword()">نسيت كلمة المرور</a>  
-  
-            <button class="login-btn" onclick="return validateForm()">تسجيل دخول</button>  
-  
-            <div id="loadingMessage" class="loading">  
-                <span class="spinner"></span>  
-                جاري تسجيل الدخول...  
-            </div>  
-  
-            <div class="divider"> - - - - - أو - - - - - </div>  
-  
-            <div class="create-account">  
-                <a href="#" class="create-account-btn" onclick="createAccount()">إنشاء حساب</a>  
-            </div>  
-        </div>  
-    </div>  
-  
-    <script>  
-        const defaultUsers = [  
-            { username: "admin", email: "mo2010mmhe@gmail.com", password: "13111993Mmsd", fullName: "محمد بن طارق", role: "الرئيس" },  
-            { username: "user", email: "user@example.com", password: "abcdef", fullName: "فهد من محمد الغامدي", role: "عضو" }  
-        ];  
-  
-        function validateForm() {  
-            const username = document.getElementById("txtUsername").value.trim();  
-            const password = document.getElementById("txtPassword").value.trim();  
-            hideMessages();  
-  
-            if (username === '') {  
-                showError('يرجى إدخال اسم المستخدم أو البريد الإلكتروني');  
-                return false;  
-            }  
-  
-            if (password === '') {  
-                showError('يرجى إدخال كلمة المرور');  
-                return false;  
-            }  
-  
-            if (password.length < 6) {  
-                showError('كلمة المرور يجب أن تكون 6 أحرف على الأقل');  
-                return false;  
-            }  
-  
-            showLoading();  
-  
-            const user = defaultUsers.find(u => u.username === username || u.email === username);  
-            if (user && user.password === password) {  
-                sessionStorage.setItem('sessionId', 'session_' + Date.now());  
-                sessionStorage.setItem('username', user.username);  
-                sessionStorage.setItem('fullName', user.fullName);  
-                sessionStorage.setItem('role', user.role);  
-                sessionStorage.setItem('loginTime', new Date().toISOString());  
-  
-                showSuccess('أهلاً ' + user.fullName);  
-                setTimeout(() => {  
-                    window.location.href = 'index.html';  
-                }, 2000);  
-            } else {  
-                showError('اسم المستخدم أو كلمة المرور غير صحيحة');  
-            }  
-  
-            return false;  
-        }  
-  
-        function showError(message) {  
-            document.getElementById("errorMessage").innerText = message;  
-            document.getElementById("errorMessage").style.display = "block";  
-            hideLoading();  
-        }  
-  
-        function showSuccess(message) {  
-            document.getElementById("successMessage").innerText = message;  
-            document.getElementById("successMessage").style.display = "block";  
-            hideLoading();  
-        }  
-  
-        function hideMessages() {  
-            document.getElementById("errorMessage").style.display = "none";  
-            document.getElementById("successMessage").style.display = "none";  
-            document.getElementById("loadingMessage").style.display = "none";  
-        }  
-  
-        function showLoading() {  
-            document.getElementById("loadingMessage").style.display = "block";  
-            document.querySelector(".login-btn").disabled = true;  
-        }  
-  
-        function hideLoading() {  
-            document.getElementById("loadingMessage").style.display = "none";  
-            document.querySelector(".login-btn").disabled = false;  
-        }  
-  
-        function goToHome() {  
-            window.location.href = 'index.html';  
-        }  
-  
-        function forgotPassword() {  
-            alert('سيتم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني');  
-        }  
-  
-        function createAccount() {  
-            alert('سيتم توجيهك لصفحة إنشاء حساب جديد');  
-            window.location.href = 'register.html';  
-        }  
-  
-        document.addEventListener('DOMContentLoaded', function () {  
-            const inputs = document.querySelectorAll('.form-input');  
-            inputs.forEach(input => {  
-                input.addEventListener('keyup', function () {  
-                    this.style.borderColor = this.value.trim() ? '#4CAF50' : '#e1e1e1';  
-                });  
-  
-                input.addEventListener('keypress', function (e) {  
-                    if (e.key === 'Enter') {  
-                        validateForm();  
-                    }  
-                });  
-            });  
-        });  
-    </script>  
-  
-    <!-- سكربت قاعدة البيانات -->  
-    <script src="base.js"></script>  
-</body>  
+        .header {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .home-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .home-link:hover {
+            color: #333;
+        }
+
+        .main-title {
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .page-title {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 40px 0;
+        }
+
+        .login-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .image-section {
+            flex: 1;
+            text-align: center;
+        }
+
+        .image-placeholder {
+            width: 300px;
+            height: 200px;
+            background: #000;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 8px;
+            margin: 0 auto;
+        }
+
+        .form-section {
+            flex: 1;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .form-title {
+            color: #333;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        /* قصّرنا طول الحقول صارت محددة 300 بيكسل فقط */
+        .form-input {
+            width: 300px;
+            padding: 12px 45px 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 6px;
+            font-size: 14px;
+            direction: rtl;
+            text-align: right;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: inline-block; /* صار العنصر محصور بحجم الحقل */
+        }
+
+        /* أيقونة المستخدم والقفل بقيت 20×20 بيكسل عشان ما تطلع ممدودة */
+        .user-icon img,
+        .lock-icon img {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        .forgot-password {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            display: block;
+            text-align: center;
+            margin: 15px 0;
+            transition: color 0.3s;
+        }
+
+        .forgot-password:hover {
+            color: #333;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: #000;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #333;
+        }
+
+        .login-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .create-account {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .create-account-btn {
+            background: #000;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .create-account-btn:hover {
+            background: #333;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 14px;
+            display: none;
+        }
+
+        .success-message {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 14px;
+            display: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #333;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+                  
+            .image-placeholder {
+                width: 100%;
+                max-width: 300px;
+            }
+                  
+            .form-section {
+                padding: 30px 20px;
+            }
+            /* نفس القياس حق الحقول ع الموبايل */
+            .form-input {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-container">
+            <a href="index.html" class="home-link" onclick="goToHome()">الصفحة الرئيسية</a>
+            <div class="main-title">تسجيل الدخول</div>
+        </div>
+    </div>
+    
+    <h1 class="page-title">بوابة الدخول الموحد</h1>
+
+    <div class="login-container">
+
+        <div class="form-section">
+            <h2 class="form-title">تسجيل الدخول</h2>
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+
+            <div class="form-group">
+                <label class="form-label">الهوية التنسيقية العليا / اسم المستخدم / البريد الإلكتروني</label>
+                <div class="input-wrapper">
+                    <input type="text" id="txtUsername" class="form-input" placeholder="أدخله هنا" />
+                    <span class="user-icon">
+                        <img src="https://i.postimg.cc/wxb11S2S/image.png" alt="User Icon">
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">كلمة المرور / الرقم السري للهوية</label>
+                <div class="input-wrapper">
+                    <input type="password" id="txtPassword" class="form-input" placeholder="أدخل كلمة المرور" />
+                    <span class="lock-icon">
+                        <img src="https://i.postimg.cc/6qZW85Bc/image.png" alt="Lock Icon">
+                    </span>
+                </div>
+            </div>
+
+            <a href="#" class="forgot-password" onclick="forgotPassword()">نسيت كلمة المرور</a>
+
+            <button class="login-btn" onclick="return validateForm()">تسجيل دخول</button>
+
+            <div id="loadingMessage" class="loading">
+                <span class="spinner"></span>
+                جاري تسجيل الدخول...
+            </div>
+
+            <div class="divider"> - - - - - أو - - - - - </div>
+
+            <div class="create-account">
+                <a href="#" class="create-account-btn" onclick="createAccount()">إنشاء حساب</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // قائمة المستخدمين الافتراضية
+        const defaultUsers = [
+            {
+                username: "admin",
+                email: "mo2010mmhe@gmail.com",
+                password: "13111993Mmsd",
+                fullName: "محمد بن طارق",
+                role: "الرئيس"
+            },
+            {
+                username: "user",
+                email: "user@example.com",
+                password: "abcdef",
+                fullName: "فهد من محمد الغامدي",
+                role: "عضو"
+            }
+        ];
+
+        // خريطة الرول لروابط الصور (تأكد تبدلها بروابط حقيقية عندك)
+        const roleImageMap = {
+            "الرئيس": "https://i.postimg.cc/qMCQjtJw/image.png",
+            "عضو": "https://example.com/images/member.png"
+        };
+        const defaultImage = "https://example.com/images/default.png";
+
+        function validateForm() {
+            const username = document.getElementById("txtUsername").value.trim();
+            const password = document.getElementById("txtPassword").value.trim();
+            hideMessages();
+
+            if (username === '') {
+                showError('يرجى إدخال اسم المستخدم أو البريد الإلكتروني');
+                return false;
+            }
+
+            if (password === '') {
+                showError('يرجى إدخال كلمة المرور');
+                return false;
+            }
+
+            if (password.length < 6) {
+                showError('كلمة المرور يجب أن تكون 6 أحرف على الأقل');
+                return false;
+            }
+
+            showLoading();
+
+            const user = defaultUsers.find(u => u.username === username || u.email === username);
+            if (user && user.password === password) {
+                // حفظ الجلسة في الـ sessionStorage
+                sessionStorage.setItem('sessionId', 'session_' + Date.now());
+                sessionStorage.setItem('username', user.username);
+                sessionStorage.setItem('fullName', user.fullName);
+                sessionStorage.setItem('role', user.role);
+                sessionStorage.setItem('loginTime', new Date().toISOString());
+
+                // الآن نعرض رسالة النجاح بالصورة والرول
+                showSuccess(user.fullName, user.role);
+
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            } else {
+                showError('اسم المستخدم أو كلمة المرور غير صحيحة');
+            }
+
+            return false;
+        }
+
+        function showError(message) {
+            document.getElementById("errorMessage").innerText = message;
+            document.getElementById("errorMessage").style.display = "block";
+            hideLoading();
+        }
+
+        function showSuccess(fullName, role) {
+            // نجيب رابط الصورة حسب الرول من الخريطة
+            const imageUrl = roleImageMap[role] || defaultImage;
+            // نص الرسالة بالكود
+            const messageHTML = `
+                أهلاً ${role} / ${fullName}
+                <img src="${imageUrl}"
+                     alt="${role}"
+                     style="width:24px; height:24px; vertical-align: middle; margin-left: 5px;">
+            `;
+            const successDiv = document.getElementById("successMessage");
+            successDiv.innerHTML = messageHTML;
+            successDiv.style.display = "block";
+            hideLoading();
+        }
+
+        function hideMessages() {
+            document.getElementById("errorMessage").style.display = "none";
+            document.getElementById("successMessage").style.display = "none";
+            document.getElementById("loadingMessage").style.display = "none";
+        }
+
+        function showLoading() {
+            document.getElementById("loadingMessage").style.display = "block";
+            document.querySelector(".login-btn").disabled = true;
+        }
+
+        function hideLoading() {
+            document.getElementById("loadingMessage").style.display = "none";
+            document.querySelector(".login-btn").disabled = false;
+        }
+
+        function goToHome() {
+            window.location.href = 'index.html';
+        }
+
+        function forgotPassword() {
+            alert('سيتم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني');
+        }
+
+        function createAccount() {
+            alert('سيتم توجيهك لصفحة إنشاء حساب جديد');
+            window.location.href = 'register.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const inputs = document.querySelectorAll('.form-input');
+            inputs.forEach(input => {
+                input.addEventListener('keyup', function () {
+                    this.style.borderColor = this.value.trim() ? '#4CAF50' : '#e1e1e1';
+                });
+
+                input.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        validateForm();
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- سكربت قاعدة البيانات -->
+    <script src="base.js"></script>
+</body>
 </html>
